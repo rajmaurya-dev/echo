@@ -84,6 +84,13 @@ const dailyFlow = [
 	},
 ];
 
+const safetyCommitments = [
+	"Echo is always disclosed as AI.",
+	"No manipulative dependency-promoting language.",
+	"Proactive check-ins are user-configurable.",
+	"Sensitive situations use safer fallback behavior.",
+];
+
 const corePrinciples = [
 	{
 		title: "Relationship first",
@@ -113,34 +120,34 @@ const corePrinciples = [
 
 const faqs = [
 	{
-		question: "What is ShipFast, and how is it different?",
+		question: "Is Echo a replacement for therapy or professional care?",
 		answer:
-			"ShipFast is a production-ready SaaS boilerplate with auth, database, payments, and email pre-configured. Unlike other starters, it gives you a full-stack TypeScript setup with edge-first APIs on Cloudflare Workers — not just a frontend template.",
+			"No. Echo is a supportive AI companion and not a licensed mental health provider. In high-risk moments, Echo uses safer responses and encourages seeking professional help.",
 	},
 	{
-		question: "Do I need to pay to get started?",
+		question: "Can I control how often Echo checks in?",
 		answer:
-			"No. The Starter plan is completely free and includes all boilerplate code, auth, and database setup. You only pay if you want premium templates, priority support, and additional integrations.",
+			"Yes. Users configure notification and check-in frequency, and can reduce or disable proactive messages at any time.",
 	},
 	{
-		question: "What tech stack does ShipFast use?",
+		question: "What does Echo remember about me?",
 		answer:
-			"ShipFast uses React with TanStack Router and Query on the frontend, Hono on Cloudflare Workers for the API, Drizzle ORM for the database, Better Auth for authentication, and shadcn/ui for components — all fully typed with TypeScript.",
+			"Echo keeps key context like preferences, ongoing threads, and important personal details to maintain continuity across conversations.",
 	},
 	{
-		question: "Can I use ShipFast for commercial projects?",
+		question: "Can I edit or delete memories?",
 		answer:
-			"Absolutely. The Starter plan is MIT licensed. Pro and Team plans include a commercial license with lifetime updates. You own everything you build.",
+			"Yes. Memory controls let users correct, remove, or refine remembered details so personalization stays accurate and comfortable.",
 	},
 	{
-		question: "How do I deploy my ShipFast project?",
+		question: "Does Echo pretend to be human?",
 		answer:
-			"ShipFast comes with pre-configured CI/CD pipelines for Cloudflare, Vercel, and Netlify. Just connect your repo and deploy with a single click — no DevOps knowledge required.",
+			"No. Echo is emotionally warm but transparent about being AI. The product does not rely on deception.",
 	},
 	{
-		question: "Do you offer refunds?",
+		question: "How does Echo handle sensitive conversations?",
 		answer:
-			"Yes. If you're not satisfied within 14 days of purchase, we'll give you a full refund — no questions asked.",
+			"Safety guardrails are built in for crisis, self-harm, abuse, and extreme vulnerability scenarios, with respectful escalation guidance where appropriate.",
 	},
 ];
 
@@ -364,44 +371,55 @@ function HomePage() {
 				</div>
 			</section>
 
-			{/* FAQ */}
-			<section id="faq" className="py-20 lg:py-28 bg-muted/30">
+			{/* Safety and trust */}
+			<section id="safety" className="py-20 lg:py-28 bg-muted/30">
 				<div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
-					<div className="grid md:grid-cols-[1fr_1.5fr] gap-12 md:gap-16 items-start">
-						<div className="md:sticky md:top-24">
-							<h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight">
-								Frequently
-								<br />
-								asked
-								<br />
-								questions
-							</h2>
-						</div>
-						<Accordion type="single" collapsible className="w-full">
-							{faqs.map((faq, i) => (
-								<AccordionItem
-									key={faq.question}
-									value={`faq-${i}`}
-									className="border-b-0 rounded-xl px-4 transition-colors data-[state=open]:bg-primary/5 data-[state=open]:border-dashed data-[state=open]:border data-[state=open]:border-primary/20"
-								>
-									<AccordionTrigger
-										className="text-base font-semibold hover:no-underline gap-3 [&[data-state=open]>svg]:rotate-0"
-										icon={
-											<>
-												<Plus className="size-4 shrink-0 text-primary [[data-state=open]>&]:hidden" />
-												<X className="size-4 shrink-0 text-primary [[data-state=closed]>&]:hidden" />
-											</>
-										}
-									>
-										{faq.question}
-									</AccordionTrigger>
-									<AccordionContent className="text-muted-foreground leading-relaxed">
-										{faq.answer}
-									</AccordionContent>
-								</AccordionItem>
-							))}
-						</Accordion>
+					<div className="text-center mb-14">
+						<Badge variant="secondary" className="mb-4 px-3 py-1 text-sm">
+							Safety and trust
+						</Badge>
+						<h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
+							Emotional warmth, clear boundaries
+						</h2>
+						<p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+							Echo is designed to feel close and supportive without crossing
+							safety lines or encouraging unhealthy dependency.
+						</p>
 					</div>
+					<div className="grid md:grid-cols-2 gap-4 mb-10">
+						{safetyCommitments.map((commitment) => (
+							<Card key={commitment} className="gap-2">
+								<CardContent className="flex items-start gap-2.5 pt-6">
+									<Check className="h-4 w-4 text-primary mt-0.5 shrink-0" />
+									<p className="text-sm">{commitment}</p>
+								</CardContent>
+							</Card>
+						))}
+					</div>
+					<Accordion type="single" collapsible className="w-full">
+						{faqs.map((faq, i) => (
+							<AccordionItem
+								key={faq.question}
+								value={`faq-${i}`}
+								className="border-b-0 rounded-xl px-4 transition-colors data-[state=open]:bg-primary/5 data-[state=open]:border-dashed data-[state=open]:border data-[state=open]:border-primary/20"
+							>
+								<AccordionTrigger
+									className="text-base font-semibold hover:no-underline gap-3 [&[data-state=open]>svg]:rotate-0"
+									icon={
+										<>
+											<Plus className="size-4 shrink-0 text-primary [[data-state=open]>&]:hidden" />
+											<X className="size-4 shrink-0 text-primary [[data-state=closed]>&]:hidden" />
+										</>
+									}
+								>
+									{faq.question}
+								</AccordionTrigger>
+								<AccordionContent className="text-muted-foreground leading-relaxed">
+									{faq.answer}
+								</AccordionContent>
+							</AccordionItem>
+						))}
+					</Accordion>
 				</div>
 			</section>
 
