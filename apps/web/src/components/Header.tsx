@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { LayoutTemplate, Menu, Zap } from "lucide-react";
+import { Heart, LayoutTemplate, Menu } from "lucide-react";
 import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -22,9 +22,10 @@ import type { NavItem } from "@/types";
 import { Button } from "./ui/button";
 
 const navigationItems: NavItem[] = [
-	{ title: "Features", href: "/#features" },
-	{ title: "Pricing", href: "/#pricing" },
-	{ title: "Documentation", href: "/#docs" },
+	{ title: "Principles", href: "/#principles" },
+	{ title: "Daily Loop", href: "/#daily-loop" },
+	{ title: "v1 Scope", href: "/#v1-scope" },
+	{ title: "Safety", href: "/#safety" },
 ];
 
 export function Header() {
@@ -38,10 +39,10 @@ export function Header() {
 				<Link to="/" className="flex items-center space-x-2">
 					<div className="flex items-center space-x-2">
 						<div className="bg-primary p-2 rounded-lg">
-							<Zap className="h-5 w-5 text-primary-foreground" />
+							<Heart className="h-5 w-5 text-primary-foreground" />
 						</div>
 						<span className="font-bold text-xl hidden sm:block">
-							SaaS Starter
+							Echo
 						</span>
 					</div>
 				</Link>
@@ -50,13 +51,13 @@ export function Header() {
 				<div className="hidden md:flex items-center space-x-6">
 					<nav className="flex items-center space-x-6 text-sm font-medium">
 						{navigationItems.map((item) => (
-							<Link
+							<a
 								key={item.title}
-								to={item.href}
+								href={item.href}
 								className="transition-colors hover:text-foreground/80 text-foreground/60"
 							>
 								{item.title}
-							</Link>
+							</a>
 						))}
 					</nav>
 
@@ -146,13 +147,13 @@ export function Header() {
 								<div className="flex flex-col space-y-4">
 									{navigationItems.map((item) => (
 										<div key={item.title}>
-											<Link
-												to={item.href}
+											<a
+												href={item.href}
 												onClick={() => setIsOpen(false)}
 												className="text-foreground/60 hover:text-foreground font-medium"
 											>
 												{item.title}
-											</Link>
+											</a>
 										</div>
 									))}
 									<div className="pt-4 border-t space-y-2">

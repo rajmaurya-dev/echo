@@ -197,8 +197,9 @@ function HomePage() {
 							size="lg"
 							variant="outline"
 							className="h-12 px-8 text-base rounded-xl"
+							asChild
 						>
-							See v1 scope
+							<a href="/#v1-scope">See v1 scope</a>
 						</Button>
 					</div>
 					<div className="mt-12 flex flex-wrap items-center justify-center gap-2.5">
@@ -216,7 +217,7 @@ function HomePage() {
 			</section>
 
 			{/* Core principles */}
-			<section className="py-20 lg:py-28 bg-muted/30">
+			<section id="principles" className="py-20 lg:py-28 bg-muted/30">
 				<div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
 					<div className="text-center mb-14">
 						<Badge variant="secondary" className="mb-4 px-3 py-1 text-sm">
@@ -254,7 +255,7 @@ function HomePage() {
 			</section>
 
 			{/* Daily experience flow */}
-			<section className="py-20 lg:py-28 bg-muted/30">
+			<section id="daily-loop" className="py-20 lg:py-28 bg-muted/30">
 				<div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
 					<div className="text-center mb-14">
 						<Badge variant="secondary" className="mb-4 px-3 py-1 text-sm">
@@ -459,8 +460,9 @@ function HomePage() {
 									size="lg"
 									variant="outline"
 									className="h-12 px-8 text-base rounded-full border-white/30 bg-white/10 text-primary-foreground hover:bg-white/20"
+									asChild
 								>
-									Read the v1 scope
+									<a href="/#v1-scope">Read the v1 scope</a>
 								</Button>
 							</div>
 							<p className="text-xs text-primary-foreground/60">
