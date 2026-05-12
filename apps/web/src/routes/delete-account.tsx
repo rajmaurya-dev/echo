@@ -5,7 +5,7 @@ export const Route = createFileRoute("/delete-account")({
 });
 
 const requestSteps = [
-	"Contact Echo support using the support method listed in the App Store listing or the support channel available inside the app.",
+	"Contact Echo support using the published support method or the support channel available inside the app.",
 	"Use the email address associated with your Echo account, or include it in the request so we can verify account ownership.",
 	"State clearly that you want to delete your Echo account and associated personal data.",
 	"If you want us to remove specific saved memories or support tickets instead of deleting the entire account, say that explicitly.",
@@ -23,7 +23,7 @@ function DeleteAccount() {
 			<div className="space-y-10">
 				<header className="space-y-4 border-b pb-8">
 					<p className="text-sm font-medium uppercase tracking-[0.2em] text-primary">
-						App Store Compliance
+						Account Help
 					</p>
 					<h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
 						Delete Your Echo Account
@@ -81,11 +81,11 @@ function DeleteAccount() {
 							agreements.
 						</p>
 						<p className="leading-7">
-							If you used Apple billing, Apple may continue to retain its own
-							transaction records under Apple's policies. Deleting your Echo
-							account does not automatically cancel an active App Store
-							subscription. Subscriptions must be cancelled separately in your
-							Apple ID subscription settings.
+							If you purchased a subscription through a third-party billing
+							provider, that provider may continue to retain its own transaction
+							records under its policies. Deleting your Echo account does not
+							automatically cancel an active subscription. Subscriptions must be
+							cancelled separately through the billing method used for purchase.
 						</p>
 					</div>
 				</section>

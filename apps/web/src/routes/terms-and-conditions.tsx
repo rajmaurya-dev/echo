@@ -24,12 +24,12 @@ const sections = [
 	{
 		title: "4. Subscriptions and Billing",
 		content:
-			"Paid features may be offered through auto-renewing subscriptions. Billing is handled by Apple when you subscribe through the App Store. Subscriptions renew automatically unless cancelled at least 24 hours before the end of the current billing period. You can manage or cancel your subscription in your Apple ID account settings after purchase.",
+			"Paid features may be offered through auto-renewing subscriptions. Subscription pricing, billing cadence, and renewal terms will be disclosed before purchase. Subscriptions renew automatically unless cancelled before the end of the current billing period. You can manage or cancel your subscription through the billing method and account settings used for purchase.",
 	},
 	{
 		title: "5. Trials, Pricing, and Refunds",
 		content:
-			"Any free trial, introductory price, or promotional offer will be disclosed before purchase. App Store purchases, refunds, and billing adjustments are handled according to Apple's payment and refund policies. Where required by law, we may provide additional rights.",
+			"Any free trial, introductory price, or promotional offer will be disclosed before purchase. Refunds and billing adjustments are handled according to the payment method and platform used for purchase, subject to applicable law. Where required by law, we may provide additional rights.",
 	},
 	{
 		title: "6. Acceptable Use",
@@ -74,7 +74,7 @@ function TermsAndConditions() {
 			<div className="space-y-10">
 				<header className="space-y-4 border-b pb-8">
 					<p className="text-sm font-medium uppercase tracking-[0.2em] text-primary">
-						App Store Legal
+						Legal
 					</p>
 					<h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
 						Terms and Conditions
