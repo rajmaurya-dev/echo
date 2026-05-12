@@ -47,7 +47,7 @@ This app now includes `expo-dev-client`, so the standard native workflow should 
 You cannot avoid rebuilding when the native binary changes. For this project that includes:
 
 - adding or removing a native package
-- changing Expo app config or config plugins
+- changing Expo app config or config plugins, such as `app.config.ts`
 - changing iOS or Android native code once those folders exist
 - upgrading Expo SDK or React Native versions
 
