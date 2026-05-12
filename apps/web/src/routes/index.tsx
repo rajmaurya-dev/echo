@@ -1,7 +1,17 @@
 import { Link } from "@tanstack/react-router";
 import { createFileRoute } from "@tanstack/react-router";
-import { ArrowRight, Check, Heart, Mail, Plus, Star, X } from "lucide-react";
-import { FeaturesSection } from "@/components/features";
+import {
+	ArrowRight,
+	Bell,
+	Brain,
+	Check,
+	Heart,
+	Mail,
+	MessageCircle,
+	Plus,
+	Star,
+	X,
+} from "lucide-react";
 import { Input } from "@/components/ui/input";
 import {
 	Accordion,
@@ -11,6 +21,13 @@ import {
 } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import {
+	Card,
+	CardContent,
+	CardDescription,
+	CardHeader,
+	CardTitle,
+} from "@/components/ui/card";
 
 export const Route = createFileRoute("/")({
 	component: HomePage,
@@ -98,11 +115,31 @@ const testimonials = [
 	},
 ];
 
-const stats = [
-	{ value: "2,000+", label: "Developers" },
-	{ value: "500+", label: "Projects shipped" },
-	{ value: "99.9%", label: "Uptime" },
-	{ value: "4.9/5", label: "Avg rating" },
+const corePrinciples = [
+	{
+		title: "Relationship first",
+		description:
+			"Every interaction should strengthen continuity between one user and one companion.",
+		icon: Heart,
+	},
+	{
+		title: "Memory is the product",
+		description:
+			"Echo remembers meaningful context so users feel known, not reset every session.",
+		icon: Brain,
+	},
+	{
+		title: "Short, human-feeling messages",
+		description:
+			"The experience feels like texting someone familiar, not reading assistant monologues.",
+		icon: MessageCircle,
+	},
+	{
+		title: "Proactive, never pushy",
+		description:
+			"Check-ins are useful and caring, while users keep full control over frequency.",
+		icon: Bell,
+	},
 ];
 
 const faqs = [
@@ -204,28 +241,43 @@ function HomePage() {
 				</div>
 			</section>
 
-			{/* Stats bar */}
-			<section className="border-y bg-muted/30">
-				<div className="container mx-auto px-4 max-w-5xl">
-					<div className="grid grid-cols-2 md:grid-cols-4 divide-x">
-						{stats.map((stat) => (
-							<div
-								key={stat.label}
-								className="py-8 md:py-10 text-center px-4"
-							>
-								<div className="text-2xl md:text-3xl font-bold text-foreground">
-									{stat.value}
-								</div>
-								<div className="text-sm text-muted-foreground mt-1">
-									{stat.label}
-								</div>
-							</div>
-						))}
+			{/* Core principles */}
+			<section className="py-20 lg:py-28 bg-muted/30">
+				<div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+					<div className="text-center mb-14">
+						<Badge variant="secondary" className="mb-4 px-3 py-1 text-sm">
+							Product principles
+						</Badge>
+						<h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
+							Built for emotional continuity
+						</h2>
+						<p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+							Echo is designed as one consistent relationship that gets more
+							useful and more personal over time.
+						</p>
+					</div>
+					<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+						{corePrinciples.map((principle) => {
+							const Icon = principle.icon;
+							return (
+								<Card key={principle.title} className="gap-4">
+									<CardHeader className="gap-3">
+										<div className="w-fit rounded-lg border bg-background p-2.5">
+											<Icon className="h-4 w-4 text-primary" />
+										</div>
+										<CardTitle>{principle.title}</CardTitle>
+									</CardHeader>
+									<CardContent>
+										<CardDescription className="text-sm leading-relaxed">
+											{principle.description}
+										</CardDescription>
+									</CardContent>
+								</Card>
+							);
+						})}
 					</div>
 				</div>
 			</section>
-
-			<FeaturesSection />
 
 			{/* Testimonials */}
 			<section className="py-20 lg:py-28 bg-muted/30">
