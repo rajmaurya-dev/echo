@@ -40,6 +40,9 @@ const config: ExpoConfig = {
   },
   extra: {
     appVariant,
+    eas: {
+      projectId: 'eade73c2-de47-4638-a354-94d66a9dd520',
+    },
     scheme,
   },
   plugins: [
