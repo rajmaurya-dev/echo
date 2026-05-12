@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { createFileRoute } from "@tanstack/react-router";
-import { ArrowRight, Check, Mail, Plus, Star, X, Zap } from "lucide-react";
+import { ArrowRight, Check, Heart, Mail, Plus, Star, X } from "lucide-react";
 import { FeaturesSection } from "@/components/features";
 import { Input } from "@/components/ui/input";
 import {
@@ -154,21 +154,21 @@ function HomePage() {
 						variant="secondary"
 						className="mb-6 px-4 py-1.5 text-sm font-medium"
 					>
-						<Zap className="mr-1.5 h-3.5 w-3.5" />
-						Ship faster with ShipFast
+						<Heart className="mr-1.5 h-3.5 w-3.5" />
+						Companionship-first AI
 					</Badge>
 
 					<h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.1] mb-6">
-						Build your SaaS
+						Your personal AI companion
 						<br />
 						<span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary/60">
-							in days, not months
+							that remembers you
 						</span>
 					</h1>
 
 					<p className="text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed">
-						Production-ready boilerplate with auth, payments, database, and
-						email — so you can focus on what makes your product unique.
+						One consistent buddy who talks in short natural messages, checks in
+						through your day, and gets more personal over time.
 					</p>
 
 					<div className="flex flex-col sm:flex-row justify-center gap-3">
@@ -178,7 +178,7 @@ function HomePage() {
 							asChild
 						>
 							<Link to="/auth">
-								Get Started Free
+								Start your first chat
 								<ArrowRight className="ml-2 h-4 w-4" />
 							</Link>
 						</Button>
@@ -187,32 +187,19 @@ function HomePage() {
 							variant="outline"
 							className="h-12 px-8 text-base rounded-xl"
 						>
-							View Demo
+							See v1 scope
 						</Button>
 					</div>
-
-					{/* Social proof strip */}
-					<div className="mt-14 flex flex-col sm:flex-row items-center justify-center gap-6 text-sm text-muted-foreground">
-						<div className="flex -space-x-2">
-							{[...Array(5)].map((_, i) => (
-								<div
-									key={`avatar-${i}`}
-									className="h-8 w-8 rounded-full border-2 border-background bg-muted flex items-center justify-center text-xs font-medium"
-								>
-									{String.fromCharCode(65 + i)}
-								</div>
-							))}
-						</div>
-						<div className="flex items-center gap-1">
-							{[...Array(5)].map((_, i) => (
-								<Star
-									key={`star-${i}`}
-									className="h-4 w-4 fill-yellow-400 text-yellow-400"
-								/>
-							))}
-							<span className="ml-1.5 font-medium text-foreground">4.9/5</span>
-							<span>from 200+ reviews</span>
-						</div>
+					<div className="mt-12 flex flex-wrap items-center justify-center gap-2.5">
+						<Badge variant="outline" className="px-3 py-1 text-sm">
+							One companion per user
+						</Badge>
+						<Badge variant="outline" className="px-3 py-1 text-sm">
+							Memory-first by design
+						</Badge>
+						<Badge variant="outline" className="px-3 py-1 text-sm">
+							Proactive check-ins you control
+						</Badge>
 					</div>
 				</div>
 			</section>
