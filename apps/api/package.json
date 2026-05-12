@@ -1,0 +1,38 @@
+{
+  "name": "api",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "wrangler deploy --dry-run",
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy --minify",
+    "cf-typegen": "wrangler types --env-interface CloudflareBindings",
+    "prisma:dev": "dotenv -e .dev.vars -- bunx prisma generate --watch",
+    "db:push": "dotenv -e .dev.vars -- bunx prisma db push",
+    "migrate:dev": "dotenv -e .dev.vars -- bunx prisma migrate dev",
+    "migrate": "dotenv -e .dev.vars -- bunx prisma migrate dev",
+    "reset": "dotenv -e .dev.vars -- bunx prisma migrate reset --force",
+    "generate": "dotenv -e .dev.vars -- bunx prisma generate",
+    "studio": "dotenv -e .dev.vars -- bunx prisma studio",
+    "db:seed": "dotenv -e .dev.vars -- bun prisma/seed.ts"
+  },
+  "prisma": {
+    "seed": "bun prisma/seed.ts"
+  },
+  "dependencies": {
+    "@hono/zod-openapi": "^1.2.0",
+    "@prisma/client": "latest",
+    "@prisma/client-runtime-utils": "^7.2.0",
+    "@prisma/extension-accelerate": "latest",
+    "better-auth": "1.3.13",
+    "hono": "^4.11.1",
+    "zod": "^4.2.1"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20260303.0",
+    "@prisma/config": "latest",
+    "dotenv-cli": "latest",
+    "prisma": "latest",
+    "wrangler": "^4.4.0"
+  }
+}

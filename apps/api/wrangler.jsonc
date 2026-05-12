@@ -1,0 +1,60 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "saas-boilerplate-api",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-12-24",
+  "env": {
+    "development": {
+      // "vars": {} // Do NOT use empty vars block as it clears dashboard variables on deploy
+    }
+  },
+  "dev": {
+    "port": 8787
+  },
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "vars": {
+    "BETTER_AUTH_URL": "https://api.example.com",
+    "CORS_ORIGIN": "https://example.com"
+  },
+  // [Note] Sensitive data below MUST be set as secrets using:
+  // `npx wrangler secret put BETTER_AUTH_SECRET`
+  // `npx wrangler secret put GOOGLE_CLIENT_SECRET`
+  // `npx wrangler secret put DATABASE_URL`
+  // `npx wrangler secret put GOOGLE_CLIENT_ID` (already exists as secret)
+  "observability": {
+    "logs": {
+      "enabled": true,
+      "head_sampling_rate": 1,
+      "invocation_logs": true,
+      "persist": true
+    }
+  },
+  // "vars": {
+  //   "MY_VAR": "my-variable"
+  // },
+  // "kv_namespaces": [
+  //   {
+  //     "binding": "MY_KV_NAMESPACE",
+  //     "id": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+  //   }
+  // ],
+  "r2_buckets": [
+    {
+      "binding": "MEDIA_BUCKET",
+      "bucket_name": "your-app-media"
+    }
+  ],
+  // "d1_databases": [
+  //   {
+  //     "binding": "MY_DB",
+  //     "database_name": "my-database",
+  //     "database_id": ""
+  //   }
+  // ],
+  // "ai": {
+  //   "binding": "AI"
+  // },
+
+}
