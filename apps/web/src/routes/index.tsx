@@ -6,12 +6,10 @@ import {
 	Brain,
 	Check,
 	Heart,
-	Mail,
 	MessageCircle,
 	Plus,
 	X,
 } from "lucide-react";
-import { Input } from "@/components/ui/input";
 import {
 	Accordion,
 	AccordionContent,
@@ -423,62 +421,52 @@ function HomePage() {
 				</div>
 			</section>
 
-			{/* CTA / Newsletter */}
+			{/* Final CTA */}
 			<section className="py-20 lg:py-28">
 				<div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
 					<div className="relative overflow-hidden rounded-3xl bg-primary px-6 py-16 sm:px-16 sm:py-20 text-center">
-						{/* Background glow */}
 						<div className="pointer-events-none absolute inset-0">
 							<div className="absolute -top-24 left-1/2 -translate-x-1/2 h-[400px] w-[600px] rounded-full bg-white/10 blur-3xl" />
 							<div className="absolute -bottom-20 -right-20 h-[300px] w-[300px] rounded-full bg-white/5 blur-3xl" />
 						</div>
 
 						<div className="relative z-10">
+							<Badge
+								variant="secondary"
+								className="mb-4 px-3 py-1 text-sm bg-white/15 text-primary-foreground border-transparent"
+							>
+								Echo v1
+							</Badge>
 							<h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-primary-foreground mb-4">
-								Ready to ship faster?
+								Start your companion relationship
 							</h2>
 							<p className="text-base md:text-lg text-primary-foreground/80 mb-10 max-w-xl mx-auto leading-relaxed">
-								Join 2,000+ developers building their next SaaS with ShipFast.
-								Stop setting up infrastructure and start building features.
+								A personal AI that remembers your context, checks in with care,
+								and feels more meaningful every time you return.
 							</p>
-
-							<div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-8">
+							<div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-6">
 								<Button
 									size="lg"
 									className="h-12 px-8 text-base rounded-full bg-white text-primary hover:bg-white/90 font-semibold"
 									asChild
 								>
 									<Link to="/auth">
-										Get Started Free
+										Start your first chat
 										<ArrowRight className="ml-2 h-4 w-4" />
 									</Link>
 								</Button>
+								<Button
+									size="lg"
+									variant="outline"
+									className="h-12 px-8 text-base rounded-full border-white/30 bg-white/10 text-primary-foreground hover:bg-white/20"
+								>
+									Read the v1 scope
+								</Button>
 							</div>
-
-							<div className="max-w-md mx-auto">
-								<p className="text-sm text-primary-foreground/60 mb-3">
-									Or subscribe to our newsletter
-								</p>
-								<div className="rounded-full bg-white/10 backdrop-blur-sm p-1.5 flex flex-col sm:flex-row gap-1.5">
-									<div className="relative flex-1">
-										<Mail className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-primary-foreground/40" />
-										<Input
-											type="email"
-											placeholder="Enter your email"
-											className="h-10 pl-10 border-0 bg-transparent text-primary-foreground placeholder:text-primary-foreground/40 focus-visible:ring-0 text-sm rounded-full"
-										/>
-									</div>
-									<Button
-										size="sm"
-										className="h-10 rounded-full px-6 bg-white text-primary hover:bg-white/90 font-medium shrink-0"
-									>
-										Subscribe
-									</Button>
-								</div>
-								<p className="text-xs text-primary-foreground/40 mt-3">
-									No spam. Unsubscribe at any time.
-								</p>
-							</div>
+							<p className="text-xs text-primary-foreground/60">
+								You stay in control of memory, boundaries, and check-in
+								frequency.
+							</p>
 						</div>
 					</div>
 				</div>
