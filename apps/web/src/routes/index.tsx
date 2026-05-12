@@ -35,59 +35,29 @@ export const Route = createFileRoute("/")({
 /* ─── Data ─────────────────────────────────────────── */
 
 
-const pricingPlans = [
-	{
-		name: "Starter",
-		price: "$0",
-		period: "forever",
-		lead: "For beginners.",
-		description: "Get started with the full boilerplate for personal projects.",
-		features: [
-			"All boilerplate code",
-			"Auth + Database setup",
-			"Community support",
-			"MIT License",
-		],
-		cta: "Get Started",
-		ctaVariant: "outline" as const,
-		popular: false,
-	},
-	{
-		name: "Pro",
-		price: "$49",
-		period: "one-time",
-		lead: "For indie hackers.",
-		description: "Unlock premium templates, priority support, and integrations.",
-		features: [
-			"Everything in Starter",
-			"Premium templates",
-			"Priority support",
-			"Lifetime updates",
-			"Stripe integration",
-			"Email templates",
-		],
-		cta: "Get Started",
-		ctaVariant: "default" as const,
-		popular: true,
-	},
-	{
-		name: "Team",
-		price: "$149",
-		period: "one-time",
-		lead: "For teams.",
-		description: "Unlock multi-tenant support and advanced admin features.",
-		features: [
-			"Everything in Pro",
-			"Multi-tenant support",
-			"Admin dashboard",
-			"Analytics built-in",
-			"Team license (up to 5)",
-			"1-on-1 onboarding call",
-		],
-		cta: "Get Started",
-		ctaVariant: "default" as const,
-		popular: false,
-	},
+const v1MustHave = [
+	"Mobile-first messaging experience",
+	"Single persistent companion per user",
+	"Personalization onboarding and companion setup",
+	"Short-form conversational response style",
+	"Persistent conversation history + foundational memory",
+	"Companion-initiated check-ins and follow-ups",
+	"Notification frequency controls",
+	"Basic safety handling for sensitive conversations",
+];
+
+const v1ShouldHave = [
+	"Companion trait editing over time",
+	"Memory correction and deletion controls",
+	"Pinned memories for important context",
+	"Simple conversation continuity summaries",
+];
+
+const v1Later = [
+	"Voice interactions",
+	"Rich avatars and visual identity",
+	"Calendar-aware check-ins",
+	"Tool actions and external integrations",
 ];
 
 const dailyFlow = [
@@ -322,83 +292,74 @@ function HomePage() {
 				</div>
 			</section>
 
-			{/* Pricing */}
-			<section id="pricing" className="py-20 lg:py-28">
+			{/* v1 scope */}
+			<section id="v1-scope" className="py-20 lg:py-28">
 				<div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
 					<div className="text-center mb-14">
 						<Badge variant="secondary" className="mb-4 px-3 py-1 text-sm">
-							Pricing
+							v1 scope
 						</Badge>
 						<h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
-							Simple, transparent pricing
+							What ships now vs later
 						</h2>
 						<p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-							No subscriptions. Pay once, build forever.
+							Echo v1 stays focused on emotional continuity, memory, and healthy
+							proactive engagement.
 						</p>
 					</div>
-
 					<div className="grid md:grid-cols-3 gap-6 items-start">
-						{pricingPlans.map((plan) => (
-							<div
-								key={plan.name}
-								className="rounded-2xl bg-white dark:bg-card p-6 flex flex-col"
-							>
-								{/* Name badge + popular tag */}
-								<div className="flex items-center gap-3 mb-6">
-									<Badge
-										variant="outline"
-										className="text-sm font-medium px-3 py-1"
-									>
-										{plan.name}
-									</Badge>
-									{plan.popular && (
-										<span className="text-sm font-medium text-primary">
-											Most popular
-										</span>
-									)}
-								</div>
-
-								{/* Price */}
-								<div className="mb-4">
-									<span className="text-5xl font-bold tracking-tight">
-										{plan.price}
-									</span>
-									<span className="text-sm text-muted-foreground ml-2">
-										/{plan.period}
-									</span>
-								</div>
-
-								{/* Description */}
-								<p className="text-sm text-muted-foreground mb-6">
-									<span className="font-semibold text-foreground">
-										{plan.lead}
-									</span>{" "}
-									{plan.description}
-								</p>
-
-								{/* CTA */}
-								<Button
-									variant={plan.ctaVariant}
-									className="w-full h-12 rounded-full text-base font-semibold mb-8"
-									asChild
-								>
-									<Link to="/auth">{plan.cta}</Link>
-								</Button>
-
-								{/* Features */}
-								<ul className="space-y-3 flex-1">
-									{plan.features.map((f) => (
-										<li
-											key={f}
-											className="flex items-start gap-2.5 text-sm"
-										>
+						<Card className="gap-4">
+							<CardHeader className="gap-3">
+								<Badge className="w-fit">Must ship</Badge>
+								<CardTitle>Core MVP</CardTitle>
+							</CardHeader>
+							<CardContent>
+								<ul className="space-y-3">
+									{v1MustHave.map((item) => (
+										<li key={item} className="flex items-start gap-2.5 text-sm">
 											<Check className="h-4 w-4 text-primary mt-0.5 shrink-0" />
-											<span>{f}</span>
+											<span>{item}</span>
 										</li>
 									))}
 								</ul>
-							</div>
-						))}
+							</CardContent>
+						</Card>
+						<Card className="gap-4">
+							<CardHeader className="gap-3">
+								<Badge variant="secondary" className="w-fit">
+									Should have
+								</Badge>
+								<CardTitle>Continuity upgrades</CardTitle>
+							</CardHeader>
+							<CardContent>
+								<ul className="space-y-3">
+									{v1ShouldHave.map((item) => (
+										<li key={item} className="flex items-start gap-2.5 text-sm">
+											<Check className="h-4 w-4 text-primary mt-0.5 shrink-0" />
+											<span>{item}</span>
+										</li>
+									))}
+								</ul>
+							</CardContent>
+						</Card>
+						<Card className="gap-4">
+							<CardHeader className="gap-3">
+								<Badge variant="outline" className="w-fit">
+									Later
+								</Badge>
+								<CardTitle>Not in v1</CardTitle>
+							</CardHeader>
+							<CardContent>
+								<ul className="space-y-3">
+									{v1Later.map((item) => (
+										<li key={item} className="flex items-start gap-2.5 text-sm">
+											<X className="h-4 w-4 text-muted-foreground mt-0.5 shrink-0" />
+											<span>{item}</span>
+										</li>
+									))}
+								</ul>
+							</CardContent>
+						</Card>
 					</div>
 				</div>
 			</section>
