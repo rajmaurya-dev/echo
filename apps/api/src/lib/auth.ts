@@ -1,5 +1,6 @@
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
+import { expo } from "@better-auth/expo";
 import { getPrisma } from "./prisma";
 
 export const getAuth = (env: { 
@@ -11,6 +12,9 @@ export const getAuth = (env: {
   CORS_ORIGIN?: string;
 }) => {
   const prisma = getPrisma(env.DATABASE_URL);
+  const isDevelopment =
+    env.BETTER_AUTH_URL?.includes("localhost") ||
+    env.CORS_ORIGIN?.includes("localhost");
 
   return betterAuth({
     database: prismaAdapter(prisma, {
@@ -20,7 +24,17 @@ export const getAuth = (env: {
     baseURL: env.BETTER_AUTH_URL,
     trustedOrigins: [
       env.CORS_ORIGIN || "",
+      "native://",
+      "native://*",
+      ...(isDevelopment
+        ? [
+            "exp://",
+            "exp://**",
+            "exp://192.168.*.*:*/**",
+          ]
+        : []),
     ],
+    plugins: [expo()],
     user: {
       additionalFields: {
         isOnboarded: {
