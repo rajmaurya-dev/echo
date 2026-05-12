@@ -1,4 +1,5 @@
-import { Github, Linkedin, Twitter, Zap } from "lucide-react";
+import { Link } from "@tanstack/react-router";
+import { Github, Heart, Linkedin, Twitter } from "lucide-react";
 import type { FooterSection, SocialLink } from "@/types";
 import { Separator } from "./ui/separator";
 
@@ -6,37 +7,24 @@ const footerSections: FooterSection[] = [
 	{
 		title: "Product",
 		links: [
-			{ title: "Features", href: "#features" },
-			{ title: "Integrations", href: "#integrations" },
-			{ title: "Pricing", href: "#pricing" },
-			{ title: "Changelog", href: "#changelog" },
-			{ title: "Docs", href: "#docs" },
-		],
-	},
-	{
-		title: "Resources",
-		links: [
-			{ title: "Blog", href: "#blog" },
-			{ title: "Community", href: "#community" },
-			{ title: "Guides", href: "#guides" },
-			{ title: "Help Center", href: "#help-center" },
+			{ title: "Principles", href: "/#principles" },
+			{ title: "Daily Loop", href: "/#daily-loop" },
+			{ title: "v1 Scope", href: "/#v1-scope" },
+			{ title: "Safety", href: "/#safety" },
 		],
 	},
 	{
 		title: "Company",
 		links: [
-			{ title: "About Us", href: "#about" },
-			{ title: "Careers", href: "#careers" },
-			{ title: "Contact", href: "#contact" },
-			{ title: "Partners", href: "#partners" },
+			{ title: "Contact", href: "/contact-us" },
+			{ title: "Start chat", href: "/auth" },
 		],
 	},
 	{
 		title: "Legal",
 		links: [
-			{ title: "Privacy Policy", href: "#privacy" },
-			{ title: "Terms of Service", href: "#terms" },
-			{ title: "Cookie Policy", href: "#cookies" },
+			{ title: "Privacy Policy", href: "/privacy-policy" },
+			{ title: "Terms & Conditions", href: "/terms-and-conditions" },
 		],
 	},
 ];
@@ -51,20 +39,21 @@ const Footer = () => {
 	return (
 		<footer className="bg-muted/30 border-t">
 			<div className="container mx-auto px-4 py-12 max-w-7xl">
-				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8 lg:gap-12">
+				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12">
 					{/* Brand & Outline */}
 					<div className="lg:col-span-2 space-y-4">
-						<a href="/" className="inline-flex items-center space-x-2">
+						<Link to="/" className="inline-flex items-center space-x-2">
 							<div className="bg-primary p-2 rounded-lg">
-								<Zap className="h-5 w-5 text-primary-foreground" />
+								<Heart className="h-5 w-5 text-primary-foreground" />
 							</div>
 							<span className="font-bold text-xl tracking-tight">
-								SaaS Starter
+								Echo
 							</span>
-						</a>
+						</Link>
 						<p className="text-sm text-muted-foreground max-w-xs pt-4 leading-relaxed">
-							The ultimate boilerplate to build robust SaaS applications
-							quickly. Stop rebuilding the wheel and focus on your core product.
+							A companionship-first AI app built around one persistent buddy,
+							short natural messages, and memory that makes every return feel
+							more personal.
 						</p>
 					</div>
 
@@ -77,12 +66,21 @@ const Footer = () => {
 							<ul className="space-y-3">
 								{section.links.map((link) => (
 									<li key={link.title}>
-										<a
-											href={link.href}
-											className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-										>
-											{link.title}
-										</a>
+										{link.href.startsWith("/#") ? (
+											<a
+												href={link.href}
+												className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+											>
+												{link.title}
+											</a>
+										) : (
+											<Link
+												to={link.href}
+												className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+											>
+												{link.title}
+											</Link>
+										)}
 									</li>
 								))}
 							</ul>
@@ -95,7 +93,7 @@ const Footer = () => {
 				{/* Bottom Section */}
 				<div className="flex flex-col md:flex-row justify-between items-center gap-4">
 					<div className="text-sm text-muted-foreground text-center md:text-left">
-						© {new Date().getFullYear()} SaaS Starter. All rights reserved.
+						© {new Date().getFullYear()} Echo. All rights reserved.
 					</div>
 
 					<div className="flex items-center space-x-6">
