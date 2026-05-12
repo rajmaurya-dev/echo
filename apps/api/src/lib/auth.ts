@@ -24,8 +24,10 @@ export const getAuth = (env: {
     baseURL: env.BETTER_AUTH_URL,
     trustedOrigins: [
       env.CORS_ORIGIN || "",
-      "native://",
-      "native://*",
+      "echo://",
+      "echo://*",
+      "echo-dev://",
+      "echo-dev://*",
       ...(isDevelopment
         ? [
             "exp://",

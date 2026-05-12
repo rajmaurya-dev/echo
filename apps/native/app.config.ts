@@ -1,16 +1,27 @@
 import type { ExpoConfig } from 'expo/config';
+import {
+  getNativeAppVariantConfig,
+  resolveAppVariant,
+} from './config/app-variant';
+
+const appVariant = resolveAppVariant(
+  process.env.APP_VARIANT ?? process.env.EXPO_PUBLIC_APP_VARIANT,
+);
+const { appName, bundleIdentifier, packageName, scheme, slug } =
+  getNativeAppVariantConfig(appVariant);
 
 const config: ExpoConfig = {
-  name: 'native',
-  slug: 'native',
+  name: appName,
+  slug,
   version: '1.0.0',
   orientation: 'portrait',
   icon: './assets/images/icon.png',
-  scheme: 'native',
+  scheme,
   userInterfaceStyle: 'automatic',
   ios: {
     icon: './assets/expo.icon',
     usesAppleSignIn: true,
+    bundleIdentifier,
   },
   android: {
     adaptiveIcon: {
@@ -21,10 +32,15 @@ const config: ExpoConfig = {
     },
     predictiveBackGestureEnabled: false,
     permissions: ['RECORD_AUDIO'],
+    package: packageName,
   },
   web: {
     output: 'static',
     favicon: './assets/images/favicon.png',
+  },
+  extra: {
+    appVariant,
+    scheme,
   },
   plugins: [
     'expo-router',
