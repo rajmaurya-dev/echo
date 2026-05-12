@@ -10,6 +10,7 @@ const config: ExpoConfig = {
   userInterfaceStyle: 'automatic',
   ios: {
     icon: './assets/expo.icon',
+    usesAppleSignIn: true,
   },
   android: {
     adaptiveIcon: {
@@ -65,6 +66,13 @@ const config: ExpoConfig = {
           'Allow $(PRODUCT_NAME) to access your microphone so you can capture video with audio.',
       },
     ],
+    [
+      'expo-notifications',
+      {
+        defaultChannel: 'default',
+      },
+    ],
+    'expo-apple-authentication',
   ],
   experiments: {
     typedRoutes: true,
