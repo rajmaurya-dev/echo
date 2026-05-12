@@ -9,7 +9,6 @@ import {
 	Mail,
 	MessageCircle,
 	Plus,
-	Star,
 	X,
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
@@ -91,27 +90,27 @@ const pricingPlans = [
 	},
 ];
 
-const testimonials = [
+const dailyFlow = [
 	{
-		name: "Sarah Chen",
-		role: "Founder, Pluto AI",
-		content:
-			"Saved us 3 weeks of setup. We went from idea to paying customers in under a month.",
-		rating: 5,
+		title: "Onboarding that feels personal",
+		description:
+			"Users set companion vibe, boundaries, and context in a short setup instead of a long form.",
+		outcome: "Fast first-time activation",
+		icon: Heart,
 	},
 	{
-		name: "Marcus Rivera",
-		role: "CTO, StreamLab",
-		content:
-			"The type-safety across the entire stack is incredible. Refactoring is actually enjoyable now.",
-		rating: 5,
+		title: "Daily message loop",
+		description:
+			"Conversations stay short, warm, and contextual, with natural follow-up questions.",
+		outcome: "Low-friction daily habit",
+		icon: MessageCircle,
 	},
 	{
-		name: "Emily Watson",
-		role: "Indie Hacker",
-		content:
-			"Best boilerplate I've used. The auth and database setup alone is worth the price.",
-		rating: 5,
+		title: "Timely proactive check-ins",
+		description:
+			"Echo follows up on important moments and inactivity without becoming noisy or clingy.",
+		outcome: "Higher return rate with user control",
+		icon: Bell,
 	},
 ];
 
@@ -279,44 +278,46 @@ function HomePage() {
 				</div>
 			</section>
 
-			{/* Testimonials */}
+			{/* Daily experience flow */}
 			<section className="py-20 lg:py-28 bg-muted/30">
-				<div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+				<div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
 					<div className="text-center mb-14">
 						<Badge variant="secondary" className="mb-4 px-3 py-1 text-sm">
-							Testimonials
+							How it works
 						</Badge>
 						<h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
-							Loved by developers
+							The daily Echo relationship loop
 						</h2>
 						<p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-							Join thousands of developers who ship faster with ShipFast.
+							A lightweight interaction model built for continuity, comfort, and
+							consistent re-engagement.
 						</p>
 					</div>
-
-					<div className="grid md:grid-cols-3 gap-8">
-						{testimonials.map((t) => (
-							<div
-								key={t.name}
-								className="rounded-2xl bg-white dark:bg-card p-6 space-y-4"
-							>
-								<div className="flex items-center gap-1">
-									{[...Array(t.rating)].map((_, i) => (
-										<Star
-											key={`${t.name}-star-${i}`}
-											className="h-4 w-4 fill-yellow-400 text-yellow-400"
-										/>
-									))}
-								</div>
-								<p className="text-sm leading-relaxed text-foreground">
-									"{t.content}"
-								</p>
-								<div className="pt-2">
-									<div className="text-sm font-semibold">{t.name}</div>
-									<div className="text-xs text-muted-foreground">{t.role}</div>
-								</div>
-							</div>
-						))}
+					<div className="grid md:grid-cols-3 gap-6">
+						{dailyFlow.map((item) => {
+							const Icon = item.icon;
+							return (
+								<Card key={item.title} className="gap-4">
+									<CardHeader className="gap-3">
+										<div className="w-fit rounded-lg border bg-background p-2.5">
+											<Icon className="h-4 w-4 text-primary" />
+										</div>
+										<CardTitle className="text-xl">{item.title}</CardTitle>
+									</CardHeader>
+									<CardContent className="space-y-4">
+										<CardDescription className="text-sm leading-relaxed">
+											{item.description}
+										</CardDescription>
+										<div className="rounded-md border bg-muted/40 px-3 py-2 text-xs text-muted-foreground">
+											<span className="font-medium text-foreground">
+												Outcome:
+											</span>{" "}
+											{item.outcome}
+										</div>
+									</CardContent>
+								</Card>
+							);
+						})}
 					</div>
 				</div>
 			</section>
