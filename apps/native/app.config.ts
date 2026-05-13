@@ -20,6 +20,9 @@ const config: ExpoConfig = {
   userInterfaceStyle: 'automatic',
   ios: {
     icon: './assets/expo.icon',
+    infoPlist: {
+      ITSAppUsesNonExemptEncryption: false,
+    },
     usesAppleSignIn: true,
     bundleIdentifier,
   },
