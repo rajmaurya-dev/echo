@@ -1,126 +1,63 @@
-# SaaS Boilerplate
+# Echo
 
-A Bun-powered monorepo for building modern SaaS applications.
+Echo is a mobile-first AI companion app. The v1 MVP is defined in `mvp.md`: one persistent companion per user that remembers useful context, replies in short natural messages, and checks in proactively without becoming intrusive.
 
-## Structure
+## MVP Focus
 
+- Messaging-first mobile experience
+- Single persistent companion identity per user
+- Personalization onboarding for companion vibe, user tone, boundaries, memories, and check-in preferences
+- Long-term memory foundation with user controls to correct or delete important memories
+- Proactive check-ins and re-engagement after inactivity
+- Safety and trust baseline for AI disclosure, sensitive topics, crisis handling, and dependency-aware language
+
+Out of scope for v1: multi-character marketplaces, broad productivity workflows, therapy replacement claims, autonomous integrations, voice-first flows, and rich avatars or generative media.
+
+## Repository Structure
+
+```txt
+apps/
+  native/   Expo + React Native app. Primary v1 product surface.
+  web/      React + Vite web app for marketing, account/legal pages, and future web surfaces.
+  api/      Cloudflare Worker API using Hono, Better Auth, Prisma, and R2 bindings.
+packages/  Shared packages can be added here when logic needs to cross app boundaries.
+mvp.md     Product scope and launch criteria for Echo v1.
 ```
-saas-boilerplate/
-├── apps/
-│   ├── web/          # React frontend application
-│   └── api/          # Cloudflare Workers API (Hono)
-├── packages/         # Shared packages (future)
-└── package.json      # Root workspace configuration
-```
 
-## Prerequisites
+## Development
 
-- [Bun](https://bun.sh) installed on your system
-
-## Getting Started
-
-### Install Dependencies
+Install dependencies from the repo root:
 
 ```bash
 bun install
 ```
 
-### Development
+Run all workspaces:
 
-Run all apps in development mode:
 ```bash
 bun dev
 ```
 
-Run specific apps:
-```bash
-# Web app only
-bun dev:web
+Run a specific app:
 
-# API only
+```bash
+bun dev:web
 bun dev:api
+bun run --filter=native start
 ```
 
-### Building
+Common checks:
 
-Build all apps:
 ```bash
 bun build
-```
-
-Build specific apps:
-```bash
-# Web app
-bun build:web
-
-# API (deploy to Cloudflare)
-bun build:api
-```
-
-### Testing
-
-Run tests across all workspaces:
-```bash
 bun test
-```
-
-### Linting & Formatting
-
-```bash
-# Lint all workspaces
 bun lint
-
-# Format all workspaces
-bun format
-
-# Check all workspaces (Biome)
 bun check
 ```
 
-## Apps
+## Product Principles
 
-### Web (`apps/web`)
-- React 19 with TypeScript
-- Vite for bundling
-- TanStack Router for routing
-- TanStack Query for data fetching
-- Tailwind CSS v4 for styling
-- Radix UI components
-- Biome for linting and formatting
-
-### API (`apps/api`)
-- Hono framework
-- Cloudflare Workers runtime
-- TypeScript
-
-## Adding Shared Packages
-
-Create packages in the `packages/` directory:
-
-```bash
-mkdir -p packages/your-package
-cd packages/your-package
-bun init
-```
-
-Then reference them in your apps:
-
-```json
-{
-  "dependencies": {
-    "your-package": "workspace:*"
-  }
-}
-```
-
-## Workspace Commands
-
-Bun workspaces support filtering:
-
-```bash
-# Run a command in all workspaces
-bun run --filter='*' <command>
-
-# Run in specific workspace
-bun run --filter=web <command>
-```
+- The native app is the source of truth for the v1 user experience.
+- Companion behavior should feel consistent over time and memory-aware, but never creepy or manipulative.
+- Notification and memory controls should be easy to find because proactive engagement is part of the product promise.
+- Safety behavior is core product work, not a post-launch add-on.

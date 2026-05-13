@@ -1,84 +1,55 @@
-# Welcome to your Expo app 👋
+# Echo Native
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Expo + React Native is the primary v1 product surface for Echo. Build mobile flows first, then let web support the surrounding account, legal, and marketing surfaces.
 
-## Get started
+## v1 Product Scope
 
-1. Install dependencies
+The native app should center on the MVP in `../../mvp.md`:
 
-   ```bash
-   bun install
-   ```
+- first-time companion setup
+- texting-style daily conversation
+- stable companion identity and tone
+- memory-aware replies with controls to correct or delete important memories
+- proactive check-ins with frequency and style settings
+- safety behavior for sensitive and high-risk conversations
 
-2. Start the app
+Avoid adding v1 work for voice-first interaction, avatar-heavy experiences, marketplace characters, broad productivity automation, or external integrations unless `mvp.md` changes.
 
-   ```bash
-   bun run start
-   ```
+## App Architecture
 
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-## Development build workflow
-
-This app now includes `expo-dev-client`, so the standard native workflow should use a reusable development build instead of Expo Go.
-
-1. Build the development client once per platform:
-
-   ```bash
-   bun run build:development:ios
-   bun run build:development:android
-   ```
-
-2. Start Metro for the installed development client:
-
-   ```bash
-   bun run start:dev-client
-   ```
-
-3. Reuse that installed build for normal JS, routing, styling, and most Expo module changes.
-
-### When you still need a new development build
-
-You cannot avoid rebuilding when the native binary changes. For this project that includes:
-
-- adding or removing a native package
-- changing Expo app config or config plugins, such as `app.config.ts`
-- changing iOS or Android native code once those folders exist
-- upgrading Expo SDK or React Native versions
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+```txt
+src/app/          Expo Router screens and layouts
+src/components/   Shared UI primitives and app shell pieces
+src/constants/    Theme tokens and shared constants
+src/hooks/        Cross-platform hooks
+src/lib/          Client libraries such as auth/API helpers
+assets/           Static images and app icons
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+Use Expo Router for navigation. Keep feature state and API access behind focused hooks or `src/lib` helpers instead of wiring network logic directly into screen components.
 
-### Other setup steps
+## Development
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+From the repo root:
 
-## Learn more
+```bash
+bun install
+bun run --filter=native start
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+Development client workflow:
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+```bash
+bun run --filter=native build:development:ios
+bun run --filter=native build:development:android
+bun run --filter=native start:dev-client
+```
 
-## Join the community
+Rebuild the development client when native dependencies, Expo config/plugins, SDK versions, or native project files change.
 
-Join our community of developers creating universal apps.
+## Quality Bar
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- Mobile chat is the highest-priority user experience.
+- Memory references must feel helpful and explainable.
+- Check-in controls must be visible and reversible.
+- Use platform-native patterns where possible, especially for safe areas, notification permissions, and accessibility.
