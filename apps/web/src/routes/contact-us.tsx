@@ -19,9 +19,9 @@ const supportChannels = [
 			"Use the support or settings area inside Echo when you can still access your account. This is the fastest way for us to match your request to the correct account.",
 	},
 	{
-		title: "App Store support contact",
+		title: "Direct support contact",
 		description:
-			"If you are reaching us from the App Store listing, use the support contact configured in the listing and include the email attached to your Echo account if possible.",
+			"If you are reaching us from an external listing or website, use the listed support contact and include the email attached to your Echo account if possible.",
 	},
 	{
 		title: "Privacy and deletion requests",
@@ -36,14 +36,14 @@ function ContactUs() {
 			<div className="space-y-10">
 				<header className="space-y-4 border-b pb-8">
 					<p className="text-sm font-medium uppercase tracking-[0.2em] text-primary">
-						App Store Support
+						Support
 					</p>
 					<h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
 						Contact Echo Support
 					</h1>
 					<p className="max-w-2xl leading-relaxed text-muted-foreground">
 						This page is the support destination for Echo users coming from the
-						app, the web product, or the App Store listing.
+						app, the web product, or other public Echo links.
 					</p>
 				</header>
 

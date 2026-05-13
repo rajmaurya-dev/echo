@@ -7,13 +7,13 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
 1. Install dependencies
 
    ```bash
-   npm install
+   bun install
    ```
 
 2. Start the app
 
    ```bash
-   npx expo start
+   bun run start
    ```
 
 In the output, you'll find options to open the app in a
@@ -22,6 +22,34 @@ In the output, you'll find options to open the app in a
 - [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
 - [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
 - [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+
+## Development build workflow
+
+This app now includes `expo-dev-client`, so the standard native workflow should use a reusable development build instead of Expo Go.
+
+1. Build the development client once per platform:
+
+   ```bash
+   bun run build:development:ios
+   bun run build:development:android
+   ```
+
+2. Start Metro for the installed development client:
+
+   ```bash
+   bun run start:dev-client
+   ```
+
+3. Reuse that installed build for normal JS, routing, styling, and most Expo module changes.
+
+### When you still need a new development build
+
+You cannot avoid rebuilding when the native binary changes. For this project that includes:
+
+- adding or removing a native package
+- changing Expo app config or config plugins, such as `app.config.ts`
+- changing iOS or Android native code once those folders exist
+- upgrading Expo SDK or React Native versions
 
 You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
 
