@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Heart, LayoutTemplate, Menu } from "lucide-react";
+import { Heart, Menu, X } from "lucide-react";
 import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -10,22 +10,15 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import {
-	Sheet,
-	SheetContent,
-	SheetHeader,
-	SheetTitle,
-	SheetTrigger,
-} from "@/components/ui/sheet";
 import { authClient, useSession } from "@/lib/auth-client";
 import type { NavItem } from "@/types";
 import { Button } from "./ui/button";
 
 const navigationItems: NavItem[] = [
-	{ title: "Principles", href: "/#principles" },
-	{ title: "Daily Loop", href: "/#daily-loop" },
-	{ title: "v1 Scope", href: "/#v1-scope" },
-	{ title: "Safety", href: "/#safety" },
+	{ title: "Product", href: "/#principles" },
+	{ title: "How it works", href: "/#daily-loop" },
+	{ title: "Pricing", href: "/#pricing" },
+	{ title: "Trust", href: "/#safety" },
 ];
 
 export function Header() {
@@ -33,35 +26,34 @@ export function Header() {
 	const { data: session, isPending } = useSession();
 
 	return (
-		<header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-			<div className="container mx-auto flex h-16 items-center justify-between px-4 max-w-7xl">
-				{/* Logo - Left side */}
-				<Link to="/" className="flex items-center space-x-2">
-					<div className="flex items-center space-x-2">
-						<div className="bg-primary p-2 rounded-lg">
-							<Heart className="h-5 w-5 text-primary-foreground" />
+		<>
+			<header className="relative z-50 w-full border-b border-border/30 bg-background/80 backdrop-blur-md">
+				<div className="container mx-auto flex h-14 items-center justify-between px-4 sm:px-6 lg:px-8 max-w-7xl">
+					{/* Logo */}
+					<Link to="/" className="flex items-center gap-2.5 group">
+						<div className="relative w-8 h-8 rounded-xl bg-gradient-to-br from-primary to-primary/70 flex items-center justify-center shadow-sm shadow-primary/20 group-hover:shadow-md group-hover:shadow-primary/30 transition-shadow">
+							<Heart className="h-4 w-4 text-primary-foreground" />
 						</div>
-						<span className="font-bold text-xl hidden sm:block">
+						<span className="font-bold text-lg tracking-tight">
 							Echo
 						</span>
-					</div>
-				</Link>
+					</Link>
 
-				{/* Desktop Navigation - Center/Right side */}
-				<div className="hidden md:flex items-center space-x-6">
-					<nav className="flex items-center space-x-6 text-sm font-medium">
+					{/* Desktop Navigation */}
+					<nav className="hidden md:flex items-center gap-1">
 						{navigationItems.map((item) => (
 							<a
 								key={item.title}
 								href={item.href}
-								className="transition-colors hover:text-foreground/80 text-foreground/60"
+								className="relative px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors rounded-lg hover:bg-muted/50"
 							>
 								{item.title}
 							</a>
 						))}
 					</nav>
 
-					<div className="flex items-center space-x-2 ml-6">
+					{/* Desktop Auth */}
+					<div className="hidden md:flex items-center gap-3">
 						{isPending ? (
 							<div className="h-8 w-8 animate-pulse rounded-full bg-muted" />
 						) : session?.user ? (
@@ -69,23 +61,27 @@ export function Header() {
 								<DropdownMenuTrigger asChild>
 									<Button
 										variant="ghost"
-										className="relative h-8 w-8 rounded-full"
+										className="relative h-9 w-9 rounded-full hover:bg-muted"
 									>
-										<Avatar className="h-8 w-8">
+										<Avatar className="h-8 w-8 border border-border/50">
 											<AvatarImage
 												src={session.user?.image || ""}
 												alt={session.user?.name || ""}
 											/>
-											<AvatarFallback>
+											<AvatarFallback className="text-xs bg-primary/10 text-primary">
 												{session.user?.name?.charAt(0) || "?"}
 											</AvatarFallback>
 										</Avatar>
 									</Button>
 								</DropdownMenuTrigger>
-								<DropdownMenuContent className="w-56" align="end" forceMount>
-									<DropdownMenuLabel className="font-normal">
+								<DropdownMenuContent
+									className="w-56 rounded-xl"
+									align="end"
+									forceMount
+								>
+									<DropdownMenuLabel className="font-normal p-3">
 										<div className="flex flex-col space-y-1">
-											<p className="text-sm font-medium leading-none">
+											<p className="text-sm font-semibold leading-none">
 												{session.user?.name}
 											</p>
 											<p className="text-xs leading-none text-muted-foreground">
@@ -94,14 +90,15 @@ export function Header() {
 										</div>
 									</DropdownMenuLabel>
 									<DropdownMenuSeparator />
-									<DropdownMenuItem asChild>
+									<DropdownMenuItem asChild className="rounded-lg cursor-pointer">
 										<a href="/dashboard">Dashboard</a>
 									</DropdownMenuItem>
-									<DropdownMenuItem asChild>
+									<DropdownMenuItem asChild className="rounded-lg cursor-pointer">
 										<a href="/settings">Settings</a>
 									</DropdownMenuItem>
 									<DropdownMenuSeparator />
 									<DropdownMenuItem
+										className="rounded-lg cursor-pointer text-destructive focus:text-destructive"
 										onClick={async () => {
 											await authClient.signOut();
 										}}
@@ -111,85 +108,114 @@ export function Header() {
 								</DropdownMenuContent>
 							</DropdownMenu>
 						) : (
-							<Button variant="default" size="sm" asChild>
-								<Link to="/auth">Get Started</Link>
-							</Button>
+							<>
+								<Button
+									variant="ghost"
+									size="sm"
+									className="text-sm font-medium hover:bg-muted/50"
+									asChild
+								>
+									<Link to="/auth">Log in</Link>
+								</Button>
+								<Button
+									variant="default"
+									size="sm"
+									className="text-sm font-semibold rounded-full px-5 shadow-sm"
+									asChild
+								>
+									<Link to="/auth">Get Started</Link>
+								</Button>
+							</>
 						)}
 					</div>
-				</div>
 
-				{/* Mobile Menu - Right side */}
-				<div className="flex items-center space-x-2 md:hidden">
-					{session?.user && (
-						<Avatar className="h-8 w-8">
-							<AvatarImage
-								src={session.user?.image || ""}
-								alt={session.user?.name || ""}
-							/>
-							<AvatarFallback>{session.user?.name?.charAt(0) || "?"}</AvatarFallback>
-						</Avatar>
-					)}
-					<Sheet open={isOpen} onOpenChange={setIsOpen}>
-						<SheetTrigger asChild>
-							<Button
-								variant="ghost"
-								className="px-0 text-base hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0"
-							>
+					{/* Mobile Menu Toggle */}
+					<div className="flex items-center gap-2 md:hidden">
+						{session?.user && (
+							<Avatar className="h-8 w-8 border border-border/50">
+								<AvatarImage
+									src={session.user?.image || ""}
+									alt={session.user?.name || ""}
+								/>
+								<AvatarFallback className="text-xs bg-primary/10 text-primary">
+									{session.user?.name?.charAt(0) || "?"}
+								</AvatarFallback>
+							</Avatar>
+						)}
+						<button
+							onClick={() => setIsOpen(!isOpen)}
+							className="w-9 h-9 flex items-center justify-center rounded-xl hover:bg-muted/50 transition-colors"
+						>
+							{isOpen ? (
+								<X className="h-5 w-5" />
+							) : (
 								<Menu className="h-5 w-5" />
-								<span className="sr-only">Toggle Menu</span>
-							</Button>
-						</SheetTrigger>
-						<SheetContent side="right" className="pr-6">
-							<SheetHeader className="flex flex-col items-start">
-								<SheetTitle>Menu</SheetTitle>
-							</SheetHeader>
-							<div className="my-4 h-[calc(100vh-8rem)] pb-10">
-								<div className="flex flex-col space-y-4">
-									{navigationItems.map((item) => (
-										<div key={item.title}>
-											<a
-												href={item.href}
-												onClick={() => setIsOpen(false)}
-												className="text-foreground/60 hover:text-foreground font-medium"
-											>
-												{item.title}
-											</a>
-										</div>
-									))}
-									<div className="pt-4 border-t space-y-2">
-										<a
-											href="/dashboard"
-											onClick={() => setIsOpen(false)}
-											className="flex items-center text-foreground/60 hover:text-foreground font-medium mb-4"
-										>
-											<LayoutTemplate className="h-4 w-4 mr-2" />
-											Dashboard
-										</a>
-										{session?.user ? (
-											<Button
-												variant="outline"
-												className="w-full"
-												onClick={async () => {
-													await authClient.signOut();
-													setIsOpen(false);
-												}}
-											>
-												Log out
-											</Button>
-										) : (
-											<Button variant="default" className="w-full" asChild>
-												<Link to="/auth" onClick={() => setIsOpen(false)}>
-													Get Started
-												</Link>
-											</Button>
-										)}
-									</div>
-								</div>
-							</div>
-						</SheetContent>
-					</Sheet>
+							)}
+						</button>
+					</div>
 				</div>
-			</div>
-		</header>
+			</header>
+
+			{/* Mobile Menu Overlay */}
+			{isOpen && (
+				<div className="fixed inset-0 z-40 md:hidden">
+					<div
+						className="absolute inset-0 bg-background/80 backdrop-blur-sm"
+						onClick={() => setIsOpen(false)}
+					/>
+					<div className="absolute top-4 left-4 right-4 mt-14 bg-card border border-border/50 rounded-2xl shadow-xl p-6 space-y-1">
+						{navigationItems.map((item) => (
+							<a
+								key={item.title}
+								href={item.href}
+								onClick={() => setIsOpen(false)}
+								className="flex items-center px-4 py-3 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-xl transition-colors"
+							>
+								{item.title}
+							</a>
+						))}
+						<div className="border-t border-border/50 pt-4 mt-4 space-y-3">
+							{session?.user ? (
+								<>
+									<a
+										href="/dashboard"
+										onClick={() => setIsOpen(false)}
+										className="flex items-center px-4 py-3 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-xl transition-colors"
+									>
+										Dashboard
+									</a>
+									<button
+										onClick={async () => {
+											await authClient.signOut();
+											setIsOpen(false);
+										}}
+										className="w-full flex items-center px-4 py-3 text-base font-medium text-destructive hover:bg-destructive/5 rounded-xl transition-colors"
+									>
+										Log out
+									</button>
+								</>
+							) : (
+								<>
+									<Link
+										to="/auth"
+										onClick={() => setIsOpen(false)}
+										className="flex items-center justify-center w-full px-4 py-3 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-xl transition-colors"
+									>
+										Log in
+									</Link>
+									<Link
+										to="/auth"
+										onClick={() => setIsOpen(false)}
+										className="flex items-center justify-center w-full px-4 py-3 text-base font-semibold bg-primary text-primary-foreground hover:bg-primary/90 rounded-xl transition-colors"
+									>
+										Get Started
+									</Link>
+								</>
+							)}
+						</div>
+					</div>
+				</div>
+			)}
+		</>
 	);
 }
