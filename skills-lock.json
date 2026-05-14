@@ -1,6 +1,36 @@
 {
   "version": 1,
   "skills": {
+    "Expo UI Jetpack Compose": {
+      "source": "expo/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/expo/skills/expo-ui-jetpack-compose/SKILL.md",
+      "computedHash": "52db319a6e4b0a5c6fe4d4add7ee32ede16abffab2143a1d81da48cd610a5b1b"
+    },
+    "Expo UI SwiftUI": {
+      "source": "expo/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/expo/skills/expo-ui-swift-ui/SKILL.md",
+      "computedHash": "409d466e43888f62987ceaf5c8be34aa76a49328528ebe290bab866f6d07e958"
+    },
+    "building-native-ui": {
+      "source": "expo/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/expo/skills/building-native-ui/SKILL.md",
+      "computedHash": "342df93f481a0dba919f372d6c7b40d2b4bf5b51dd24363aea2e5d0bae27a6fa"
+    },
+    "eas-update-insights": {
+      "source": "expo/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/expo/skills/eas-update-insights/SKILL.md",
+      "computedHash": "1e75ed22734fb37993f0ae0c57eceeaf37661ab452d7c7f55c740b1e41c2a0c1"
+    },
+    "expo-module": {
+      "source": "expo/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/expo/skills/expo-module/SKILL.md",
+      "computedHash": "439263df82d935eb35fa3074b7cc176b1cbc26cd95c619ba8c1f9331242016ec"
+    },
     "handoff": {
       "source": "mattpocock/skills",
       "sourceType": "github",
@@ -11,6 +41,12 @@
       "source": "nextlevelbuilder/ui-ux-pro-max-skill",
       "sourceType": "github",
       "computedHash": "0a413bf988d06481f69bb81df2070741c3ba12dd9f1be2706d57f259c905992d"
+    },
+    "use-dom": {
+      "source": "expo/skills",
+      "sourceType": "github",
+      "skillPath": "plugins/expo/skills/use-dom/SKILL.md",
+      "computedHash": "8eca0e229f16e3499e5dbf791a79f5a5cba1e98b4af88ca495c903930d7f1ba0"
     }
   }
 }
